@@ -10,15 +10,28 @@ function App() {
     { name: "Emre", favTime: "Gece", focus: "frontend+backend" },
   ]);
 
+  function addMember(newMember) {
+    console.log("addMember çalıştı", newMember);
+    const newMemberList = [...memberList, newMember];
+    setMemberList(newMemberList);
+  }
+  const [editOrder, setEditOrder] = useState(null);
+
+  const editHandler = (order) => {
+    console.log("editHandler Çalıştı", order);
+    setEditOrder(order);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        {memberList.map((member) => (
+        {memberList.map((member, i) => (
           <span key={member.name}>
             {member.name}-{member.favTime}-{member.focus}
+            <button onClick={() => editHandler(i)}>Düzenle</button>
           </span>
         ))}
-        <Form />
+        <Form addMember={addMember} editingMember={memberList[editOrder]} />
       </header>
     </div>
   );

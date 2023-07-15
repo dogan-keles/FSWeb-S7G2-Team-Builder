@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-function Form() {
+function Form(props) {
+  console.log("abc", props);
   const initialData = {
-    isim: "",
-    zaman: "",
-    uzmanlık: "",
+    name: "",
+    favTime: "",
+    focus: "",
   };
   const [formData, setFormData] = useState(initialData);
+
+  useEffect(() => {
+    console.log("Form Componenti mount edildi");
+    if (props.editingMember) {
+      setFormData(props.editingMember);
+    }
+  }, [props.editingMember]);
+
   const resetFn = () => {
     console.log("resetFn çalıştı");
     setFormData(initialData);
@@ -23,6 +32,7 @@ function Form() {
   const submitFn = (e) => {
     e.preventDefault();
     console.log("SubmitFn Çalıştı:");
+    props.addMember(formData);
   };
   return (
     <form onSubmit={submitFn}>
@@ -31,9 +41,8 @@ function Form() {
       <br />
       <input
         type="text"
-        id="isim"
-        name="isim"
-        value={formData.isim}
+        name="name"
+        value={formData.name}
         onChange={onChangeFn}
       />
 
@@ -42,8 +51,8 @@ function Form() {
       <br />
       <input
         type="text"
-        name="zaman"
-        value={formData.zaman}
+        name="favTime"
+        value={formData.favTime}
         onChange={onChangeFn}
       />
       <br />
@@ -51,8 +60,8 @@ function Form() {
       <br />
       <input
         type="text"
-        name="uzmanlik"
-        value={formData.uzmanlik}
+        name="focus"
+        value={formData.focus}
         onChange={onChangeFn}
       />
       <br />
