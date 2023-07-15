@@ -37,7 +37,7 @@ function Form(props) {
   return (
     <form onSubmit={submitFn}>
       <br />
-      <label htmlFor="isim">İsim:</label>
+      <label htmlFor="name">İsim:</label>
       <br />
       <input
         type="text"
@@ -47,7 +47,7 @@ function Form(props) {
       />
 
       <br />
-      <label htmlFor="zaman">Favori Çalışma Zamanı:</label>
+      <label htmlFor="favTime">Favori Çalışma Zamanı:</label>
       <br />
       <input
         type="text"
@@ -65,7 +65,9 @@ function Form(props) {
         onChange={onChangeFn}
       />
       <br />
-      <button type="submit"> Gönder </button>
+      <button type="submit">
+        {props.editingMember ? "Düzenle" : "Gönder"}
+      </button>
       <br />
       <button type="reset" onClick={resetFn}>
         {" "}
